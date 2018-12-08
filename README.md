@@ -2,7 +2,7 @@
 
 **TBLLib** is a library for compiling and decompiling name tables (.tbl files) used by the 3DS game *Persona Q2: New Cinema Labyrinth*.
 
-**TBLEditor** is a command line tool using **TBLLib** to compile editable tables (.ebl files) into name tables, and vice versa. An .ebl file is simple text file and can be opened with any text editor.
+**TBLEditor** is a command line tool using **TBLLib** to compile editable tables (.ebl files) into name tables, and vice versa. An .ebl file is just a simple text file and can be opened with any text editor.
 
 ## Versions
 
