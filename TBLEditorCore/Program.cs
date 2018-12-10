@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using TBLLib;
@@ -46,6 +46,10 @@ namespace TBLEditor {
             fileInfo = new FileInfo(outPath);
             outPath = fileInfo.FullName;
             
+            var outDir = Path.GetDirectoryName(outPath);
+            if (!Directory.Exists(outDir))
+                Directory.CreateDirectory(outDir);
+
             switch (mode) {
                 case TBLMode.COMPILE:
                     var lines = File.ReadLines(path);
