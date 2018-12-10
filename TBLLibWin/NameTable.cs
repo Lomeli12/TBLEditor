@@ -27,7 +27,7 @@ namespace TBLLib {
                 var sizeBytes = BitConverter.GetBytes(nameEntries.Count);
                 fileBytes.Add(sizeBytes[0]);
                 fileBytes.Add(sizeBytes[1]);
-                log.debug(string.Format("Header: {0} {1}", sizeBytes[0].ToString("X2"), sizeBytes[1].ToString("X2")));
+                log.debug($"Header: {sizeBytes[0]:X2} {sizeBytes[1]:X2}");
 
                 var offset = 0;
                 // For skillnametable, since that one likes to be special.
@@ -46,8 +46,7 @@ namespace TBLLib {
                     var size = BitConverter.GetBytes(offset);
                     fileBytes.Add(size[0]);
                     fileBytes.Add(size[1]);
-                    log.debug(string.Format("Writing: Offset {0}, String: {1}", offset.ToString("X2"),
-                        entry.getString()));
+                    log.debug($"Writing: Offset {offset:X2}, String: {entry.getString()}");
                 }
 
                 // For skillnametable, since that one likes to be special.
@@ -70,7 +69,7 @@ namespace TBLLib {
         private void readBytes(byte[] tableData) {
             var numOfEntries = (short) mergeBytesIntoShort(tableData, 0);
             log.info("Table Size: " + numOfEntries);
-            log.debug(string.Format("Header: {0} {1}", tableData[0].ToString("X2"), tableData[1].ToString("X2")));
+            log.debug($"Header: {tableData[0]:X2} {tableData[1]:X2}");
             // For some reason, skillnametable.tbl is slightly weird here and things fuck up
             // without this check for offsets.
             var arrOffset = 1;
@@ -103,8 +102,7 @@ namespace TBLLib {
                 }
                 
                 nameEntries.Add(new SJISString(constructedData));
-                log.debug(string.Format("Reading: Offset {0}; String: {1}", offsets[i].ToString("X"), 
-                    nameEntries[nameEntries.Count - 1].getString()));
+                log.debug($"Reading: Offset {offsets[i]:X}; String: {nameEntries[nameEntries.Count - 1].getString()}");
             }
         }
 
