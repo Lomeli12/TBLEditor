@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using TBLLib;
@@ -19,6 +19,9 @@ namespace TBLEditor {
                 log.close();
                 return;
             }
+            
+            var fileInfo = new FileInfo(path);
+            path = fileInfo.FullName;
 
             log.info("Starting TBLEditor");
 
@@ -39,7 +42,10 @@ namespace TBLEditor {
                 if (mode == TBLMode.COMPILE) outPath += ".tbl";
                 else outPath += ".ebl";
             }
-
+            
+            fileInfo = new FileInfo(outPath);
+            outPath = fileInfo.FullName;
+            
             switch (mode) {
                 case TBLMode.COMPILE:
                     var lines = File.ReadLines(path);
@@ -112,7 +118,8 @@ namespace TBLEditor {
                     if (i + 1 < args.Length) {
                         outPath = args[i + 1];
                         var valid = !string.IsNullOrEmpty(outPath) &&
-                                    outPath.IndexOfAny(Path.GetInvalidFileNameChars()) < 0;
+                                    Path.GetFullPath(outPath).IndexOfAny(Path.GetInvalidPathChars()) < 0 &&
+                                    Path.GetFileName(outPath).IndexOfAny(Path.GetInvalidFileNameChars()) < 0;
                         if (!valid) {
                             log.error("Must give a valid file name for the output.");
                             log.close();
