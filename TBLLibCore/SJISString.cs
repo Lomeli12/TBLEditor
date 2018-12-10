@@ -1,6 +1,5 @@
 namespace TBLLib {
     public class SJISString {
-        public static readonly int NAME_MAX = 60;
         private readonly byte[] characterBytes;
         private readonly string convertedString;
 

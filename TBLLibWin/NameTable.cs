@@ -67,7 +67,7 @@ namespace TBLLib {
             return true;
         }
 
-        private void readBytes(byte[] tableData, Logger log) {
+        private void readBytes(byte[] tableData) {
             var numOfEntries = (short) mergeBytesIntoShort(tableData, 0);
             log.info("Table Size: " + numOfEntries);
             log.debug(string.Format("Header: {0} {1}", tableData[0].ToString("X2"), tableData[1].ToString("X2")));
@@ -131,7 +131,7 @@ namespace TBLLib {
             var tableData = File.ReadAllBytes(path);
             if (tableData != null && tableData.Length > 0) {
                 var nameTable = new NameTable(path, log);
-                nameTable.readBytes(tableData, log);
+                nameTable.readBytes(tableData);
                 return nameTable;
             }
             return null;
